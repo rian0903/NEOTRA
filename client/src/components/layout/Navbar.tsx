@@ -1,113 +1,129 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { NAV_LINKS, HERO_DATA } from '@/data/content';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenConsultation?: () => void;
+}
+
+export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-void/85 backdrop-blur-md border-b border-slate-800/80 py-4 shadow-xl shadow-black/40'
-          : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-accent rounded-sm">
-          <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-studio-navy/40 border border-slate-700/60 p-1 flex items-center justify-center group-hover:border-accent transition-colors">
-            <Image
-              src="/brand/logo1_cropped.png"
-              alt="NEOTRA Logo"
-              width={36}
-              height={36}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span className="font-heading font-bold text-xl tracking-wider text-slate-100 group-hover:text-accent transition-colors">
-            NEOTRA
-          </span>
-        </a>
-
-        {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="hover:text-accent transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Primary CTA */}
-        <div className="hidden md:flex items-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-studio-navy to-slate-800 border border-slate-700 hover:border-accent hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] text-slate-100 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide uppercase transition-all duration-300 group"
-          >
-            <span>{HERO_DATA.primaryCta}</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+    <>
+      <header
+        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-[1000px] transition-all duration-300 ${
+          scrolled ? 'shadow-2xl shadow-black/60' : ''
+        }`}
+      >
+        <div className="bg-[#0A0F1A]/85 backdrop-blur-md border border-[#1E2C44] rounded-full px-5 py-3 md:px-7 md:py-3.5 flex items-center justify-between">
+          {/* Brand Logo */}
+          <a href="#" className="flex items-center gap-2 group">
+            <span className="font-display font-extrabold text-lg md:text-xl tracking-tight text-white group-hover:text-agency-electric transition-colors">
+              NEOTRA<span className="text-agency-electric font-mono text-xs ml-0.5">®</span>
+            </span>
           </a>
-        </div>
 
-        {/* Mobile Menu Toggle Button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle Navigation Menu"
-          aria-expanded={mobileOpen}
-          className="md:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 hover:text-accent focus:outline-none"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {mobileOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 p-6 shadow-2xl flex flex-col gap-6 animate-in slide-in-from-top-4 duration-200">
-          <nav className="flex flex-col gap-4 text-base font-medium text-slate-200">
+          {/* Nav Links - Desktop */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="hover:text-accent transition-colors py-2 border-b border-slate-800/60"
+                className="text-sm font-medium text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <a
-            href="#contact"
-            onClick={() => setMobileOpen(false)}
-            className="w-full flex items-center justify-center gap-2 bg-accent text-void font-semibold py-3 rounded-lg text-sm uppercase tracking-wider hover:bg-sky-300 transition-colors"
-          >
-            <span>{HERO_DATA.primaryCta}</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
+          {/* Right Area: Availability Status & Action */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Availability Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#111927] border border-[#1E2C44]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#21B30B] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#21B30B]"></span>
+              </span>
+              <span className="text-xs font-mono text-[#94A3B8]">
+                {HERO_DATA.availability}
+              </span>
+            </div>
+
+            {/* Book Call Button */}
+            <button
+              onClick={onOpenConsultation}
+              className="btn-primary-electric px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-1.5"
+            >
+              Book Call
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <div className="flex items-center gap-3 md:hidden">
+            <button
+              onClick={onOpenConsultation}
+              className="btn-primary-electric px-3 py-1.5 rounded-full text-xs font-semibold"
+            >
+              Book Call
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-[#94A3B8] hover:text-white rounded-full bg-[#111927] border border-[#1E2C44]"
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Drawer Navigation */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#0A0F1A]/95 backdrop-blur-xl flex flex-col justify-center px-8 py-12 md:hidden animate-fadeIn">
+          <div className="flex flex-col gap-6 text-center">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-2xl font-display font-bold text-[#F8FAFC] hover:text-agency-electric transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="pt-6 border-t border-[#1E2C44] flex flex-col items-center gap-4">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#111927] border border-[#1E2C44]">
+                <span className="h-2 w-2 rounded-full bg-[#21B30B]"></span>
+                <span className="text-xs font-mono text-[#94A3B8]">
+                  {HERO_DATA.availability}
+                </span>
+              </div>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenConsultation?.();
+                }}
+                className="btn-primary-electric w-full max-w-xs py-3 rounded-full font-semibold flex items-center justify-center gap-2"
+              >
+                Book Free Discovery Call <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

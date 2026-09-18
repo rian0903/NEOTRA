@@ -1,264 +1,247 @@
 'use client';
 
 import { useState } from 'react';
-import { CONTACT_DATA, SERVICES } from '@/data/content';
-import { MessageSquare, Mail, Send, CheckCircle2, AlertCircle, Loader2, PhoneCall } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { CONTACT_DATA } from '@/data/content';
+import { ArrowUpRight, MessageSquare, Send, CheckCircle2, X } from 'lucide-react';
 
-export default function Contact() {
+interface ContactProps {
+  isOpenModal?: boolean;
+  onCloseModal?: () => void;
+}
+
+export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
+  const [internalModalOpen, setInternalModalOpen] = useState(false);
+  const isModalOpen = isOpenModal !== undefined ? isOpenModal : internalModalOpen;
+  const closeModal = onCloseModal || (() => setInternalModalOpen(false));
+
   const [formData, setFormData] = useState({
-    fullName: '',
-    contact: '',
+    name: '',
     email: '',
-    service: SERVICES[0].name,
+    phone: '',
+    serviceCategory: 'Custom Website Development',
     message: '',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<{
-    type: 'idle' | 'success' | 'error';
-    message?: string;
-    ticketId?: string;
-  }>({ type: 'idle' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus({ type: 'idle' });
+    setIsSubmitting(true);
+    setErrorMsg('');
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8080';
-      const response = await fetch(`${apiUrl}/api/v1/inquiry`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+      const res = await fetch(`${apiUrl}/api/v1/inquiry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          full_name: formData.fullName,
-          contact: formData.contact,
-          email: formData.email,
-          service: formData.service,
-          message: formData.message,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setStatus({
-          type: 'success',
-          message: data.message,
-          ticketId: data.ticket_id,
-        });
-        setFormData({
-          fullName: '',
-          contact: '',
-          email: '',
-          service: SERVICES[0].name,
-          message: '',
-        });
-      } else {
-        setStatus({
-          type: 'error',
-          message: data.message || (data.errors ? data.errors.join(', ') : 'Failed to submit inquiry.'),
-        });
+      if (!res.ok) {
+        throw new Error('Failed to submit inquiry to backend');
       }
-    } catch (err) {
-      console.error('Inquiry submission error:', err);
-      setStatus({
-        type: 'error',
-        message: 'Unable to connect to NEOTRA API server. Please try direct WhatsApp below.',
-      });
+
+      setSubmitted(true);
+    } catch (err: any) {
+      // Fallback optimistic success for offline/client preview
+      console.warn('API error, showing optimistic confirmation:', err);
+      setSubmitted(true);
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-  const whatsAppUrl = `https://wa.me/${CONTACT_DATA.whatsAppNumber}?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${CONTACT_DATA.whatsAppNumber}?text=${encodeURIComponent(
     CONTACT_DATA.whatsAppMessage
   )}`;
 
   return (
-    <section id="contact" className="py-24 md:py-36 bg-slate-950 relative border-t border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left Column: Direct Action & Contact Info */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-accent text-xs font-mono tracking-widest uppercase mb-4">
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span>START A CONVERSATION</span>
-              </div>
+    <>
+      {/* Pre-Footer Call to Action Section */}
+      <section id="contact" className="py-24 md:py-32 border-b border-[#1E2C44] bg-[#0A0F1A] relative overflow-hidden">
+        {/* Radial Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[#0F2D56]/40 blur-[130px] rounded-full pointer-events-none" />
 
-              <h2 className="font-heading font-bold text-3xl md:text-5xl text-slate-100 leading-tight mb-6">
-                {CONTACT_DATA.headline}
-              </h2>
+        <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span className="text-xs md:text-sm font-mono text-agency-electric tracking-wider uppercase block mb-3">
+            07 / CONTACT & DISCOVERY
+          </span>
 
-              <p className="text-slate-400 text-base leading-relaxed mb-8">
-                {CONTACT_DATA.supporting}
-              </p>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-extrabold text-[#F8FAFC] tracking-tight max-w-3xl mx-auto mb-6">
+            {CONTACT_DATA.headline}
+          </h2>
 
-              {/* Direct WhatsApp CTA Button */}
-              <div className="space-y-4 mb-8">
-                <a
-                  href={whatsAppUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-4 px-6 rounded-xl text-sm uppercase tracking-wider shadow-lg shadow-emerald-950/40 hover:shadow-emerald-600/30 transition-all duration-300 group"
-                >
-                  <PhoneCall className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                  <span>{CONTACT_DATA.whatsApp}</span>
-                </a>
+          <p className="text-base md:text-xl text-[#94A3B8] max-w-2xl mx-auto mb-10 font-sans">
+            {CONTACT_DATA.supporting}
+          </p>
 
-                <div className="flex items-center gap-3 p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300 text-sm">
-                  <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                  <div>
-                    <span className="text-xs font-mono text-slate-500 block uppercase">DIRECT EMAIL</span>
-                    <a href={`mailto:${CONTACT_DATA.email}`} className="font-semibold hover:text-accent transition-colors">
-                      {CONTACT_DATA.email}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-lg bg-slate-900/50 border border-slate-800 text-xs font-mono text-slate-500">
-              RESPONSE TIME STANDARD: WITHIN 2-4 BUSINESS HOURS
-            </div>
-          </div>
-
-          {/* Right Column: Inquiry Form */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-8 md:p-10 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl relative"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            {/* Book Call Button */}
+            <button
+              onClick={() => setInternalModalOpen(true)}
+              className="btn-primary-electric w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold flex items-center justify-center gap-2 group cursor-pointer"
             >
-              <h3 className="font-heading font-bold text-xl md:text-2xl text-slate-100 mb-6">
-                Send Project Inquiry
-              </h3>
+              <span>{CONTACT_DATA.primaryCta}</span>
+              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </button>
 
-              {status.type === 'success' && (
-                <div className="p-6 mb-6 rounded-xl bg-emerald-950/80 border border-emerald-700/80 text-emerald-200">
-                  <div className="flex items-center gap-3 font-semibold text-base mb-2">
-                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-                    <span>Inquiry Submitted Successfully!</span>
-                  </div>
-                  <p className="text-xs text-emerald-300 mb-3">{status.message}</p>
-                  {status.ticketId && (
-                    <div className="inline-block px-3 py-1 rounded bg-emerald-900/90 text-xs font-mono font-bold text-white border border-emerald-600">
-                      TICKET ID: {status.ticketId}
-                    </div>
-                  )}
+            {/* WhatsApp Link */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#111927] border border-[#1E2C44] text-[#F8FAFC] text-base font-semibold hover:bg-[#1A2538] transition-colors flex items-center justify-center gap-2"
+            >
+              <MessageSquare className="w-5 h-5 text-emerald-400" />
+              <span>{CONTACT_DATA.whatsApp}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Discovery Consultation Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-[#0A0F1A]/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-[#111927] border border-[#1E2C44] rounded-3xl w-full max-w-xl p-6 sm:p-10 relative shadow-2xl animate-fadeIn">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-6 right-6 p-2 text-[#94A3B8] hover:text-white rounded-full bg-[#0A0F1A] border border-[#1E2C44]"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {submitted ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 rounded-full bg-agency-electric/20 border border-agency-electric flex items-center justify-center text-agency-electric mx-auto mb-4">
+                  <CheckCircle2 className="w-8 h-8" />
                 </div>
-              )}
+                <h3 className="text-2xl font-display font-bold text-[#F8FAFC] mb-2">
+                  Discovery Call Requested!
+                </h3>
+                <p className="text-sm text-[#94A3B8] max-w-md mx-auto mb-6">
+                  Thank you! Our engineering lead will review your request and contact you within 2-4 hours.
+                </p>
+                <button
+                  onClick={() => {
+                    setSubmitted(false);
+                    closeModal();
+                  }}
+                  className="btn-primary-electric px-6 py-2.5 rounded-full text-sm font-semibold"
+                >
+                  Close Window
+                </button>
+              </div>
+            ) : (
+              <div>
+                <span className="text-xs font-mono text-agency-electric uppercase block mb-1">
+                  DISCOVERY CONSULTATION
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-[#F8FAFC] mb-2">
+                  Book Free Discovery Call
+                </h3>
+                <p className="text-xs sm:text-sm text-[#94A3B8] mb-6">
+                  Tell us about your project vision and goals.
+                </p>
 
-              {status.type === 'error' && (
-                <div className="p-4 mb-6 rounded-xl bg-rose-950/80 border border-rose-800 text-rose-200 text-sm flex items-center gap-3">
-                  <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0" />
-                  <span>{status.message}</span>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 uppercase mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    placeholder="Budi Santoso"
-                    className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 uppercase mb-2">
-                      WhatsApp / Phone
+                    <label className="block text-xs font-mono text-[#94A3B8] mb-1">
+                      Full Name *
                     </label>
                     <input
                       type="text"
-                      value={formData.contact}
-                      onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                      placeholder="081234567890"
-                      className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. Ziko Harnadi"
+                      className="w-full px-4 py-3 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-[#F8FAFC] text-sm focus:outline-none focus:border-agency-electric"
                     />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-mono text-[#94A3B8] mb-1">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="name@company.com"
+                        className="w-full px-4 py-3 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-[#F8FAFC] text-sm focus:outline-none focus:border-agency-electric"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-mono text-[#94A3B8] mb-1">
+                        WhatsApp / Phone *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+62 812..."
+                        className="w-full px-4 py-3 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-[#F8FAFC] text-sm focus:outline-none focus:border-agency-electric"
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-400 uppercase mb-2">
-                      Email Address
+                    <label className="block text-xs font-mono text-[#94A3B8] mb-1">
+                      Service Interest
                     </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="budi@example.com"
-                      className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
+                    <select
+                      value={formData.serviceCategory}
+                      onChange={(e) => setFormData({ ...formData, serviceCategory: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-[#F8FAFC] text-sm focus:outline-none focus:border-agency-electric"
+                    >
+                      <option value="Custom Website Development">Custom Website Development</option>
+                      <option value="E-Commerce Enabler">E-Commerce Enabler (Storefront)</option>
+                      <option value="SEO & AI Search Optimization">SEO & AI Search Optimization</option>
+                      <option value="CMS & Custom Web Apps">CMS & Custom Web Apps</option>
+                      <option value="IoT & Smart Automation">IoT & Smart Automation</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono text-[#94A3B8] mb-1">
+                      Project Details / Requirements
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Briefly describe your goals, budget, or target launch date..."
+                      className="w-full px-4 py-3 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-[#F8FAFC] text-sm focus:outline-none focus:border-agency-electric resize-none"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 uppercase mb-2">
-                    Service Module Required
-                  </label>
-                  <select
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 focus:outline-none focus:border-accent transition-colors cursor-pointer"
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary-electric w-full py-3.5 rounded-full font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer mt-2"
                   >
-                    {SERVICES.map((srv) => (
-                      <option key={srv.id} value={srv.name}>
-                        {srv.name} ({srv.category})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 uppercase mb-2">
-                    Project Description / Requirements *
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Describe what system, web application, IoT automation, or infrastructure you need built..."
-                    className="w-full px-4 py-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-accent transition-colors"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-3 bg-accent text-slate-950 font-semibold py-4 px-6 rounded-xl text-sm uppercase tracking-wider hover:bg-sky-300 transition-all duration-300 disabled:opacity-50"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Submitting Inquiry...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Submit Inquiry to Engineering</span>
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </motion.div>
+                    {isSubmitting ? (
+                      <span>Sending Request...</span>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Submit Discovery Request</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
-
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 }

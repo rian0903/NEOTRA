@@ -2,23 +2,22 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'NEOTRA — Integrated Digital Engineering Studio',
-  description: 'Digital engineering studio providing web application development, IoT & smart automation, network infrastructure, digital UI/UX design, and technical project mentorship.',
+  title: 'NEOTRA | Jakarta Digital Web Agency® Trusted by 100+ Brands®',
+  description: 'Trusted by 100+ Brands. We design, build, and optimize websites and digital products that drive measurable growth for our clients.',
   keywords: [
+    'Jakarta Web Agency',
     'Digital Engineering Studio',
-    'Web Engineering',
-    'IoT Automation',
-    'Network Infrastructure',
+    'Next.js Web Development',
+    'Go REST API',
     'UI/UX Design',
-    'Next.js',
-    'Go Fiber',
-    'Software Architecture',
+    'SEO & AI Search Optimization',
+    'IoT Automation',
     'NEOTRA',
   ],
-  authors: [{ name: 'NEOTRA Engineering Team' }],
+  authors: [{ name: 'NEOTRA Strategic Group' }],
   openGraph: {
-    title: 'NEOTRA — Integrated Digital Engineering Studio',
-    description: 'We build digital systems that make complex things feel simple. Web, automation, infrastructure, and digital product work.',
+    title: 'NEOTRA | Jakarta Digital Web Agency® Trusted by 100+ Brands®',
+    description: 'We design, build, and ship high-performance websites and digital systems combining strategic design, built-in SEO, and full handover.',
     url: 'https://neotra.id',
     siteName: 'NEOTRA',
     locale: 'id_ID',
@@ -37,7 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="dark scroll-smooth">
-      <body className="bg-void text-slate-100 antialiased selection:bg-accent selection:text-void">
+      <body className="bg-agency-dark text-agency-textPrimary antialiased selection:bg-agency-electric selection:text-white min-h-screen">
         {children}
       </body>
     </html>

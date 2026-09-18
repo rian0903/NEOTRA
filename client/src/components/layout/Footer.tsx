@@ -1,105 +1,112 @@
 'use client';
 
-import Image from 'next/image';
 import { FOOTER_DATA, NAV_LINKS } from '@/data/content';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-void border-t border-slate-800/80 pt-20 pb-12 text-slate-400">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-slate-800/80">
-          
-          {/* Brand Info */}
-          <div className="md:col-span-5 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="relative w-9 h-9 rounded-lg overflow-hidden bg-studio-navy/40 border border-slate-700/60 p-1 flex items-center justify-center">
-                  <Image
-                    src="/brand/logo1_cropped.png"
-                    alt="NEOTRA Logo"
-                    width={36}
-                    height={36}
-                    className="object-contain"
-                  />
-                </div>
-                <span className="font-heading font-bold text-2xl tracking-wider text-slate-100">
-                  NEOTRA
-                </span>
-              </div>
+    <footer className="bg-[#0A0F1A] text-[#94A3B8] pt-16 pb-12">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Large Watermark / Display Text */}
+        <div className="border-b border-[#1E2C44] pb-12 mb-12">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-[#F8FAFC] tracking-tight uppercase opacity-90 select-none">
+            Digital-First Jakarta Web Agency<span className="text-agency-electric">®</span>
+          </h2>
+        </div>
 
-              <p className="text-slate-400 text-sm max-w-sm mb-6 font-mono uppercase tracking-wider">
-                {FOOTER_DATA.statement}
-              </p>
-            </div>
-
-            <div className="text-xs font-mono text-slate-500">
-              INTEGRATED DIGITAL ENGINEERING STUDIO
-            </div>
+        {/* 4-Column Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
+          {/* Col 1: Brand Info */}
+          <div className="md:col-span-1">
+            <span className="font-display font-extrabold text-xl text-white block mb-3">
+              NEOTRA<span className="text-agency-electric font-mono text-xs">®</span>
+            </span>
+            <p className="text-xs text-[#94A3B8] leading-relaxed mb-4 font-sans">
+              PT NEOTRA Strategic Group. Integrated Digital Engineering Studio.
+            </p>
+            <span className="inline-block px-3 py-1 rounded-full bg-[#111927] border border-[#1E2C44] text-[11px] font-mono text-agency-electric">
+              Jakarta South · Indonesia
+            </span>
           </div>
 
-          {/* Navigation Links */}
-          <div className="md:col-span-4">
-            <h4 className="text-xs font-mono text-slate-200 uppercase tracking-widest mb-6">
+          {/* Col 2: Navigation Links */}
+          <div>
+            <span className="text-xs font-mono text-[#64748B] uppercase tracking-wider block mb-4">
               NAVIGATION
-            </h4>
-            <ul className="space-y-3 text-sm">
+            </span>
+            <ul className="space-y-2.5 text-sm">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="hover:text-accent transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                  >
                     {link.label}
                   </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Col 3: Direct Contact */}
+          <div>
+            <span className="text-xs font-mono text-[#64748B] uppercase tracking-wider block mb-4">
+              DIRECT CONTACT
+            </span>
+            <ul className="space-y-2.5 text-sm font-sans">
               <li>
-                <a href="#contact" className="hover:text-accent transition-colors font-semibold text-slate-300">
-                  Contact & Inquiry
+                <a
+                  href="mailto:contact@neotra.id"
+                  className="text-[#F8FAFC] hover:text-agency-electric transition-colors font-medium"
+                >
+                  contact@neotra.id
                 </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/6281380870105"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                >
+                  +62 813 8087 0105
+                </a>
+              </li>
+              <li className="text-xs text-[#64748B] pt-2">
+                Mon - Fri · 09:00 - 18:00 WIB
               </li>
             </ul>
           </div>
 
-          {/* Socials & Actions */}
-          <div className="md:col-span-3 flex flex-col justify-between">
-            <div>
-              <h4 className="text-xs font-mono text-slate-200 uppercase tracking-widest mb-6">
-                CONNECT
-              </h4>
-              <ul className="space-y-3 text-sm">
-                {FOOTER_DATA.socials.map((soc) => (
-                  <li key={soc.label}>
-                    <a
-                      href={soc.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors inline-flex items-center gap-1.5"
-                    >
-                      <span>{soc.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          {/* Col 4: Social Links */}
+          <div>
+            <span className="text-xs font-mono text-[#64748B] uppercase tracking-wider block mb-4">
+              CONNECT
+            </span>
+            <div className="flex flex-col space-y-2.5 text-sm">
+              {FOOTER_DATA.socials.map((soc) => (
+                <a
+                  key={soc.label}
+                  href={soc.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors inline-flex items-center gap-1 group"
+                >
+                  <span>{soc.label}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                </a>
+              ))}
             </div>
-
-            <button
-              onClick={scrollToTop}
-              className="mt-8 inline-flex items-center gap-2 text-xs font-mono text-accent uppercase tracking-wider hover:text-sky-300 transition-colors self-start"
-            >
-              <span>BACK TO TOP</span>
-              <ArrowUp className="w-4 h-4" />
-            </button>
           </div>
-
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-500 gap-4">
-          <div>{FOOTER_DATA.copyright}</div>
-          <div>BUILT WITH NEXT.JS & GO FIBER REST API</div>
+        {/* Bottom Copyright Bar */}
+        <div className="pt-8 border-t border-[#1E2C44] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#64748B] gap-4">
+          <p>{FOOTER_DATA.copyright}</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-[#94A3B8]">Terms of Service</a>
+            <a href="#" className="hover:text-[#94A3B8]">Privacy Policy</a>
+          </div>
         </div>
       </div>
     </footer>

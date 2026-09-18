@@ -1,149 +1,120 @@
 'use client';
 
-import { useState } from 'react';
-import { SERVICES } from '@/data/content';
-import { Service } from '@/types';
-import { ChevronDown, Code2, Cpu, Network, LayoutGrid, GraduationCap, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { SERVICES, SERVICE_PILLARS, TECH_STACK } from '@/data/content';
+import { Code, ShoppingBag, Search, Layers, CheckCircle2, ArrowUpRight } from 'lucide-react';
 
-export default function Services() {
-  const [expandedId, setExpandedId] = useState<string | null>('web-engineering');
+const ICON_MAP: Record<string, any> = {
+  Code: Code,
+  ShoppingBag: ShoppingBag,
+  Search: Search,
+  Layers: Layers,
+};
 
-  const getServiceIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Code': return <Code2 className="w-6 h-6 text-accent" />;
-      case 'Cpu': return <Cpu className="w-6 h-6 text-accent" />;
-      case 'Network': return <Network className="w-6 h-6 text-accent" />;
-      case 'LayoutGrid': return <LayoutGrid className="w-6 h-6 text-accent" />;
-      case 'GraduationCap': return <GraduationCap className="w-6 h-6 text-accent" />;
-      default: return <Code2 className="w-6 h-6 text-accent" />;
-    }
-  };
+interface ServicesProps {
+  onOpenConsultation?: () => void;
+}
 
-  const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
-
+export default function Services({ onOpenConsultation }: ServicesProps) {
   return (
-    <section id="services" className="py-24 md:py-36 bg-void relative">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+    <section id="services" className="py-20 md:py-28 border-b border-[#1E2C44] bg-[#0A0F1A]">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="text-xs font-mono text-accent uppercase tracking-widest mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>CORE CAPABILITIES</span>
-            </div>
-            <h2 className="font-heading font-bold text-3xl md:text-5xl text-slate-100 tracking-tight">
-              STUDIO SERVICES & ENGINEERING
-            </h2>
-          </div>
-          <p className="text-slate-400 text-sm md:text-base max-w-md font-normal leading-relaxed">
-            Integrated engineering capabilities across web applications, IoT devices, network infrastructure, UI/UX systems, and mentorship.
+        <div className="mb-16">
+          <span className="text-xs md:text-sm font-mono text-[#64748B] tracking-wider uppercase block mb-2">
+            02 / SERVICES
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-[#F8FAFC] mb-4">
+            Services built to create impact.
+          </h2>
+          <p className="text-[#94A3B8] text-base md:text-lg max-w-2xl font-sans">
+            Designing experiences and engineering scalable digital systems that solve real business problems.
           </p>
         </div>
 
-        {/* Editorial Rows List */}
-        <div className="border-t border-slate-800 divide-y divide-slate-800/80">
-          {SERVICES.map((service, index) => {
-            const isExpanded = expandedId === service.id;
+        {/* Services Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {SERVICES.map((service) => {
+            const IconComponent = ICON_MAP[service.iconName] || Code;
 
             return (
-              <motion.div
+              <div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="py-8 group transition-colors"
+                className="card-agency p-8 md:p-10 rounded-2xl flex flex-col justify-between group"
               >
-                {/* Header Row */}
-                <div
-                  onClick={() => toggleExpand(service.id)}
-                  className="flex items-center justify-between cursor-pointer select-none gap-6"
-                >
-                  <div className="flex items-center gap-6 md:gap-10">
-                    <span className="font-mono text-2xl md:text-3xl font-bold text-slate-600 group-hover:text-accent transition-colors">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] flex items-center justify-center text-agency-electric group-hover:scale-110 transition-transform">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <span className="text-xs font-mono text-[#64748B]">
                       {service.number}
                     </span>
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 group-hover:border-accent/40 transition-colors">
-                      {getServiceIcon(service.iconName)}
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-xl md:text-2xl text-slate-100 group-hover:text-white transition-colors">
-                        {service.name}
-                      </h3>
-                      <p className="text-slate-400 text-sm md:text-base hidden sm:block mt-1">
-                        {service.summary}
-                      </p>
-                    </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <button
-                      aria-label={`Toggle details for ${service.name}`}
-                      className={`p-2.5 rounded-full border transition-all ${
-                        isExpanded
-                          ? 'bg-accent text-slate-950 border-accent rotate-180'
-                          : 'bg-slate-900 text-slate-400 border-slate-800 group-hover:text-white'
-                      }`}
-                    >
-                      <ChevronDown className="w-5 h-5" />
-                    </button>
-                  </div>
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-[#F8FAFC] mb-3 group-hover:text-agency-electric transition-colors">
+                    {service.name}
+                  </h3>
+
+                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6 font-sans">
+                    {service.summary}
+                  </p>
+
+                  <ul className="space-y-2.5 mb-8">
+                    {service.capabilities.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-[#F8FAFC]">
+                        <CheckCircle2 className="w-4 h-4 text-agency-electric shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Mobile Summary */}
-                <p className="text-slate-400 text-sm sm:hidden mt-3 pl-16">
-                  {service.summary}
-                </p>
-
-                {/* Expanded Drawer Details */}
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden pl-0 md:pl-24 pt-6"
-                    >
-                      <div className="p-6 md:p-8 rounded-xl bg-slate-950/80 border border-slate-800/80 mt-4">
-                        <h4 className="text-xs font-mono text-accent uppercase tracking-wider mb-4">
-                          CAPABILITY SCOPE
-                        </h4>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-                          {service.capabilities.map((cap) => (
-                            <div key={cap} className="flex items-center gap-3 text-slate-300 text-sm">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                              <span>{cap}</span>
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="flex items-center justify-between pt-6 border-t border-slate-800/80">
-                          <span className="text-xs font-mono text-slate-500">
-                            {service.category} SERVICE MODULE
-                          </span>
-                          <a
-                            href="#contact"
-                            className="inline-flex items-center gap-2 bg-studio-navy hover:bg-slate-800 border border-slate-700 hover:border-accent text-slate-100 px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-300 group/btn"
-                          >
-                            <span>{service.cta}</span>
-                            <ArrowUpRight className="w-4 h-4 text-accent group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                          </a>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                <button
+                  onClick={onOpenConsultation}
+                  className="w-full py-3 px-4 rounded-xl bg-[#0A0F1A] border border-[#1E2C44] text-xs font-mono text-[#F8FAFC] hover:border-agency-electric hover:text-agency-electric transition-colors flex items-center justify-center gap-2 group/btn"
+                >
+                  <span>{service.cta}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </button>
+              </div>
             );
           })}
         </div>
 
+        {/* 3 Pillar Feature Strip */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8 rounded-2xl bg-[#111927] border border-[#1E2C44] mb-16">
+          {SERVICE_PILLARS.map((pillar, idx) => (
+            <div key={idx} className="flex flex-col">
+              <div className="text-xs font-mono text-agency-electric mb-1">
+                0{idx + 1} / FEATURE
+              </div>
+              <h4 className="text-base font-bold text-[#F8FAFC] mb-1">
+                {pillar.title}
+              </h4>
+              <p className="text-xs text-[#94A3B8] font-sans">
+                {pillar.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Tech Stack Badges */}
+        <div className="text-center">
+          <p className="text-xs font-mono text-[#64748B] uppercase tracking-widest mb-6">
+            TECHNOLOGY STACK & TOOLS
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {TECH_STACK.map((tech) => (
+              <div
+                key={tech.name}
+                className="px-4 py-2 rounded-full bg-[#111927] border border-[#1E2C44] text-xs font-mono text-[#94A3B8] hover:text-[#F8FAFC] hover:border-agency-electric transition-colors"
+              >
+                <span className="text-agency-electric mr-1.5">•</span>
+                {tech.name}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

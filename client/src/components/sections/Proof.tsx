@@ -1,70 +1,60 @@
 'use client';
 
-import { PROOF_DATA } from '@/data/content';
-import { ShieldCheck, Server, Activity, FileCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { TESTIMONIALS } from '@/data/content';
+import { Star, Quote } from 'lucide-react';
 
 export default function Proof() {
-  const getStatIcon = (idx: number) => {
-    switch (idx) {
-      case 0: return <ShieldCheck className="w-5 h-5 text-accent" />;
-      case 1: return <Activity className="w-5 h-5 text-accent" />;
-      case 2: return <Server className="w-5 h-5 text-accent" />;
-      case 3: return <FileCheck className="w-5 h-5 text-accent" />;
-      default: return <ShieldCheck className="w-5 h-5 text-accent" />;
-    }
-  };
-
   return (
-    <section id="about" className="py-24 md:py-36 bg-slate-950/80 border-t border-slate-800/80 relative">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+    <section className="py-20 md:py-28 border-b border-[#1E2C44] bg-[#0A0F1A]">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <div className="text-xs font-mono text-accent uppercase tracking-widest mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>{PROOF_DATA.label}</span>
-            </div>
-            <h2 className="font-heading font-bold text-3xl md:text-5xl text-slate-100 tracking-tight">
-              {PROOF_DATA.title}
-            </h2>
-          </div>
-          <p className="text-slate-400 text-sm md:text-base max-w-md font-normal leading-relaxed">
-            {PROOF_DATA.summary}
-          </p>
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs md:text-sm font-mono text-[#64748B] tracking-wider uppercase block mb-2">
+            05 / PROOF & REVIEWS
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-[#F8FAFC]">
+            Words from our clients
+          </h2>
         </div>
 
-        {/* Real Engineering Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PROOF_DATA.stats.map((stat, idx) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-8 rounded-2xl bg-slate-900/90 border border-slate-800/90 hover:border-accent/50 transition-colors flex flex-col justify-between"
+        {/* Testimonials 3-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {TESTIMONIALS.map((t, idx) => (
+            <div
+              key={idx}
+              className="card-agency p-8 rounded-2xl flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-xs font-mono text-slate-500">METRIC 0{idx + 1}</span>
-                <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                  {getStatIcon(idx)}
+              <div>
+                {/* 5 Stars */}
+                <div className="flex items-center gap-1 text-amber-400 mb-6">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-amber-400" />
+                  ))}
                 </div>
+
+                <Quote className="w-8 h-8 text-agency-electric/30 mb-4" />
+
+                <p className="text-sm text-[#F8FAFC] leading-relaxed mb-6 italic font-sans">
+                  "{t.quote}"
+                </p>
               </div>
 
-              <div>
-                <div className="font-heading font-extrabold text-3xl md:text-4xl text-slate-100 mb-2">
-                  {stat.value}
+              <div className="pt-4 border-t border-[#1E2C44] flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-agency-electric/20 border border-agency-electric flex items-center justify-center font-mono font-bold text-agency-electric text-sm">
+                  {t.client.charAt(0)}
                 </div>
-                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                  {stat.label}
+                <div>
+                  <h4 className="text-sm font-bold text-[#F8FAFC]">
+                    {t.client}
+                  </h4>
+                  <p className="text-xs font-mono text-[#64748B]">
+                    {t.role} · {t.company}
+                  </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-
       </div>
     </section>
   );

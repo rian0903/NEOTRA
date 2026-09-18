@@ -1,74 +1,64 @@
 'use client';
 
 import { PROCESS_STEPS } from '@/data/content';
-import { GitCommit, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 md:py-36 bg-void relative">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
+    <section id="process" className="py-20 md:py-28 border-b border-[#1E2C44] bg-[#0A0F1A]">
+      <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div>
-            <div className="text-xs font-mono text-accent uppercase tracking-widest mb-3 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>METHODOLOGY & EXECUTION</span>
-            </div>
-            <h2 className="font-heading font-bold text-3xl md:text-5xl text-slate-100 tracking-tight">
-              HOW WE WORK.
+            <span className="text-xs md:text-sm font-mono text-[#64748B] tracking-wider uppercase block mb-2">
+              04 / PROCESS
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-[#F8FAFC]">
+              How We Work
             </h2>
           </div>
-          <p className="text-slate-400 text-sm md:text-base max-w-md font-normal leading-relaxed">
-            A practical 5-step engineering process focused on clarity, milestone delivery, and maintainable systems.
+          <p className="text-[#94A3B8] text-base max-w-md mt-4 md:mt-0 font-sans">
+            A transparent 4-stage engineering workflow designed for rapid speed and zero friction.
           </p>
         </div>
 
-        {/* Timeline Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
-          {PROCESS_STEPS.map((step, idx) => (
-            <motion.div
+        {/* Process Step Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {PROCESS_STEPS.map((step) => (
+            <div
               key={step.number}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group relative p-6 rounded-2xl bg-slate-950/90 border border-slate-800/90 hover:border-accent/60 transition-all duration-300 flex flex-col justify-between"
+              className="card-agency p-8 md:p-10 rounded-2xl flex flex-col justify-between"
             >
-              {/* Header */}
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-mono text-xl font-bold text-accent">
+                  <span className="text-2xl font-mono font-bold text-agency-electric">
                     {step.number}
                   </span>
-                  <div className="p-2 rounded-lg bg-slate-900 text-slate-400 group-hover:text-accent transition-colors">
-                    <GitCommit className="w-4 h-4" />
-                  </div>
+                  <span className="text-xs font-mono text-[#64748B] uppercase tracking-widest">
+                    STAGE {step.number}
+                  </span>
                 </div>
 
-                <h3 className="font-heading font-bold text-xl text-slate-100 group-hover:text-white transition-colors mb-3">
+                <h3 className="text-xl md:text-2xl font-display font-bold text-[#F8FAFC] mb-3">
                   {step.name}
                 </h3>
 
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6">
+                <p className="text-sm text-[#94A3B8] leading-relaxed mb-6 font-sans">
                   {step.summary}
                 </p>
-              </div>
 
-              {/* Step details checklist */}
-              <div className="pt-4 border-t border-slate-900 text-[11px] font-mono text-slate-500 space-y-1.5">
-                {step.details.map((detail) => (
-                  <div key={detail} className="flex items-start gap-1.5">
-                    <span className="text-accent">•</span>
-                    <span>{detail}</span>
-                  </div>
-                ))}
+                <ul className="space-y-2.5 border-t border-[#1E2C44] pt-4">
+                  {step.details.map((detail, idx) => (
+                    <li key={idx} className="flex items-center gap-2.5 text-xs text-[#F8FAFC]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-agency-electric shrink-0" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-
       </div>
     </section>
   );
