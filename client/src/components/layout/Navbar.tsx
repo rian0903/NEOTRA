@@ -27,12 +27,14 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           scrolled ? 'shadow-lg shadow-black/5' : ''
         }`}
       >
-        <div className="bg-white/90 backdrop-blur-md border border-[#E2E8F0] rounded-full px-5 py-3 md:px-7 md:py-3.5 flex items-center justify-between">
-          {/* Brand Logo */}
+        <div className="bg-white/90 backdrop-blur-md border border-[#E2E8F0] rounded-full px-5 py-2.5 md:px-7 md:py-3 flex items-center justify-between">
+          {/* Brand Logo Image (logo2.png) */}
           <a href="#" className="flex items-center gap-2 group">
-            <span className="font-display font-extrabold text-lg md:text-xl tracking-tight text-[#0A0F1A] group-hover:text-[#006FFF] transition-colors">
-              NEOTRA<span className="text-[#006FFF] font-mono text-xs ml-0.5">®</span>
-            </span>
+            <img
+              src="/brand/logo2.png"
+              alt="NEOTRA"
+              className="h-7 md:h-8 w-auto object-contain transition-transform group-hover:scale-105"
+            />
           </a>
 
           {/* Nav Links - Desktop */}
@@ -93,7 +95,12 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white/98 backdrop-blur-xl flex flex-col justify-center px-8 py-12 md:hidden animate-fadeIn">
-          <div className="flex flex-col gap-6 text-center">
+          <div className="flex flex-col gap-6 text-center items-center">
+            <img
+              src="/brand/logo2.png"
+              alt="NEOTRA"
+              className="h-9 w-auto object-contain mb-4"
+            />
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -104,7 +111,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 {link.label}
               </a>
             ))}
-            <div className="pt-6 border-t border-[#E2E8F0] flex flex-col items-center gap-4">
+            <div className="pt-6 border-t border-[#E2E8F0] flex flex-col items-center gap-4 w-full">
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#F5F7FA] border border-[#E2E8F0]">
                 <span className="h-2 w-2 rounded-full bg-[#21B30B]"></span>
                 <span className="text-xs font-mono text-[#64748B]">

@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Large Watermark / Display Text */}
         <div className="border-b border-[#1E2C44] pb-12 mb-12">
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-white tracking-tight uppercase opacity-95 select-none">
-            Digital-First Jakarta Web Agency<span className="text-[#006FFF]">®</span>
+            Integrated Digital Engineering Studio
           </h2>
         </div>
 
@@ -18,9 +18,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-16">
           {/* Col 1: Brand Info */}
           <div className="md:col-span-1">
-            <span className="font-display font-extrabold text-xl text-white block mb-3">
-              NEOTRA<span className="text-[#006FFF] font-mono text-xs ml-0.5">®</span>
-            </span>
+            <img
+              src="/brand/logo2.png"
+              alt="NEOTRA"
+              className="h-8 w-auto object-contain mb-4 brightness-200"
+            />
             <p className="text-xs text-[#94A3B8] leading-relaxed mb-4 font-sans">
               PT NEOTRA Strategic Group. Integrated Digital Engineering Studio.
             </p>
