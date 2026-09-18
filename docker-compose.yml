@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # --- Go Fiber REST API Service ---
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: neotra-api
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - ALLOWED_ORIGINS=*
+      - ENVIRONMENT=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8080/api/v1/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - neotra-network
+
+  # --- Next.js Frontend Client Service ---
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:8080
+    container_name: neotra-client
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - neotra-network
+
+networks:
+  neotra-network:
+    driver: bridge
