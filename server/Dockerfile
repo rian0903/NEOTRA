@@ -23,7 +23,7 @@ FROM alpine:3.19 AS runner
 
 WORKDIR /app
 
-RUN apk add --no-cache ca-certificates tzdata
+RUN apk add --no-cache ca-certificates tzdata curl
 
 # Copy binary from builder stage
 COPY --from=builder /app/neotra-api .
