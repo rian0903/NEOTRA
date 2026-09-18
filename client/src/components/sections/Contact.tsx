@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { CONTACT_DATA } from '@/data/content';
+import ScrollReveal from '@/components/common/ScrollReveal';
 import { ArrowUpRight, MessageSquare, Send, CheckCircle2, X } from 'lucide-react';
 
 interface ContactProps {
@@ -18,7 +19,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
     name: '',
     email: '',
     phone: '',
-    serviceCategory: 'Custom Website Development',
+    serviceCategory: 'Web Engineering',
     message: '',
   });
 
@@ -64,39 +65,41 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-[#006FFF]/5 blur-[130px] rounded-full pointer-events-none" />
 
         <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span className="text-xs md:text-sm font-mono text-[#006FFF] tracking-wider uppercase block mb-3">
-            07 / CONTACT & DISCOVERY
-          </span>
+          <ScrollReveal direction="up" delay={0.1}>
+            <span className="text-xs md:text-sm font-mono text-[#006FFF] tracking-wider uppercase block mb-3">
+              07 / CONTACT & DISCOVERY
+            </span>
 
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-extrabold text-[#0A0F1A] tracking-tight max-w-3xl mx-auto mb-6">
-            {CONTACT_DATA.headline}
-          </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-extrabold text-[#0A0F1A] tracking-tight max-w-3xl mx-auto mb-6">
+              {CONTACT_DATA.headline}
+            </h2>
 
-          <p className="text-base md:text-xl text-[#64748B] max-w-2xl mx-auto mb-10 font-sans">
-            {CONTACT_DATA.supporting}
-          </p>
+            <p className="text-base md:text-xl text-[#64748B] max-w-2xl mx-auto mb-10 font-sans">
+              {CONTACT_DATA.supporting}
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            {/* Book Call Button */}
-            <button
-              onClick={() => setInternalModalOpen(true)}
-              className="btn-primary-blue w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold flex items-center justify-center gap-2 group cursor-pointer"
-            >
-              <span>{CONTACT_DATA.primaryCta}</span>
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              {/* Book Call Button */}
+              <button
+                onClick={() => setInternalModalOpen(true)}
+                className="btn-primary-blue w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <span>{CONTACT_DATA.primaryCta}</span>
+                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </button>
 
-            {/* WhatsApp Link */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-base font-semibold hover:bg-white transition-colors flex items-center justify-center gap-2 shadow-xs"
-            >
-              <MessageSquare className="w-5 h-5 text-emerald-600" />
-              <span>{CONTACT_DATA.whatsApp}</span>
-            </a>
-          </div>
+              {/* WhatsApp Link */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-base font-semibold hover:bg-white transition-colors flex items-center justify-center gap-2 shadow-xs"
+              >
+                <MessageSquare className="w-5 h-5 text-emerald-600" />
+                <span>{CONTACT_DATA.whatsApp}</span>
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -118,10 +121,10 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-[#0A0F1A] mb-2">
-                  Discovery Call Requested!
+                  Permintaan Konsultasi Terkirim!
                 </h3>
                 <p className="text-sm text-[#64748B] max-w-md mx-auto mb-6">
-                  Thank you! Our engineering lead will review your request and contact you within 2-4 hours.
+                  Terima kasih! Tim engineering NEOTRA akan meninjau kebutuhan Anda dan menghubungi Anda dalam 2-4 jam.
                 </p>
                 <button
                   onClick={() => {
@@ -130,32 +133,32 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                   }}
                   className="btn-primary-blue px-6 py-2.5 rounded-full text-sm font-semibold"
                 >
-                  Close Window
+                  Tutup Jendela
                 </button>
               </div>
             ) : (
               <div>
                 <span className="text-xs font-mono text-[#006FFF] uppercase block mb-1">
-                  DISCOVERY CONSULTATION
+                  KONSULTASI PROYEK
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-[#0A0F1A] mb-2">
-                  Book Free Discovery Call
+                  Mulai Konsultasi Teknis
                 </h3>
                 <p className="text-xs sm:text-sm text-[#64748B] mb-6">
-                  Tell us about your project vision and goals.
+                  Sampaikan kebutuhan web, otomasi IoT, jaringan, atau desain proyek Anda.
                 </p>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-mono text-[#64748B] mb-1">
-                      Full Name *
+                      Nama Lengkap *
                     </label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Ziko Harnadi"
+                      placeholder="e.g. Budi Santoso"
                       className="w-full px-4 py-3 rounded-xl bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-sm focus:outline-none focus:border-[#006FFF]"
                     />
                   </div>
@@ -176,7 +179,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                     </div>
                     <div>
                       <label className="block text-xs font-mono text-[#64748B] mb-1">
-                        WhatsApp / Phone *
+                        No. WhatsApp / Telepon *
                       </label>
                       <input
                         type="tel"
@@ -191,30 +194,30 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
 
                   <div>
                     <label className="block text-xs font-mono text-[#64748B] mb-1">
-                      Service Interest
+                      Kategori Layanan
                     </label>
                     <select
                       value={formData.serviceCategory}
                       onChange={(e) => setFormData({ ...formData, serviceCategory: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-sm focus:outline-none focus:border-[#006FFF]"
                     >
-                      <option value="Custom Website Development">Custom Website Development</option>
-                      <option value="E-Commerce Enabler">E-Commerce Enabler (Storefront)</option>
-                      <option value="SEO & AI Search Optimization">SEO & AI Search Optimization</option>
-                      <option value="CMS & Custom Web Apps">CMS & Custom Web Apps</option>
+                      <option value="Web Engineering">Web Engineering</option>
                       <option value="IoT & Smart Automation">IoT & Smart Automation</option>
+                      <option value="Network & Infrastructure">Network & Infrastructure</option>
+                      <option value="Digital Design / UI/UX">Digital Design / UI/UX</option>
+                      <option value="Technical Mentorship & Project Assistance">Technical Mentorship & Project Assistance</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-mono text-[#64748B] mb-1">
-                      Project Details / Requirements
+                      Deskripsi Proyek / Kebutuhan
                     </label>
                     <textarea
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Briefly describe your goals, budget, or target launch date..."
+                      placeholder="Jelaskan secara singkat apa yang ingin Anda bangun, perbaiki, atau hubungkan..."
                       className="w-full px-4 py-3 rounded-xl bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-sm focus:outline-none focus:border-[#006FFF] resize-none"
                     />
                   </div>
@@ -225,11 +228,11 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                     className="btn-primary-blue w-full py-3.5 rounded-full font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer mt-2"
                   >
                     {isSubmitting ? (
-                      <span>Sending Request...</span>
+                      <span>Mengirimkan Permintaan...</span>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Submit Discovery Request</span>
+                        <span>Kirim Permintaan Konsultasi</span>
                       </>
                     )}
                   </button>
