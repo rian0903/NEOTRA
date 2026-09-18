@@ -5,12 +5,12 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0F1A] text-[#94A3B8] pt-16 pb-12">
+    <footer className="bg-[#0F2D56] text-[#94A3B8] pt-16 pb-12 border-t border-[#1E2C44]">
       <div className="max-w-[1080px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Large Watermark / Display Text */}
         <div className="border-b border-[#1E2C44] pb-12 mb-12">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-[#F8FAFC] tracking-tight uppercase opacity-90 select-none">
-            Digital-First Jakarta Web Agency<span className="text-agency-electric">®</span>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-black text-white tracking-tight uppercase opacity-95 select-none">
+            Digital-First Jakarta Web Agency<span className="text-[#006FFF]">®</span>
           </h2>
         </div>
 
@@ -19,12 +19,12 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className="md:col-span-1">
             <span className="font-display font-extrabold text-xl text-white block mb-3">
-              NEOTRA<span className="text-agency-electric font-mono text-xs">®</span>
+              NEOTRA<span className="text-[#006FFF] font-mono text-xs ml-0.5">®</span>
             </span>
             <p className="text-xs text-[#94A3B8] leading-relaxed mb-4 font-sans">
               PT NEOTRA Strategic Group. Integrated Digital Engineering Studio.
             </p>
-            <span className="inline-block px-3 py-1 rounded-full bg-[#111927] border border-[#1E2C44] text-[11px] font-mono text-agency-electric">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#0A0F1A] border border-[#1E2C44] text-[11px] font-mono text-[#006FFF]">
               Jakarta South · Indonesia
             </span>
           </div>
@@ -39,7 +39,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                    className="text-[#94A3B8] hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -57,7 +57,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:contact@neotra.id"
-                  className="text-[#F8FAFC] hover:text-agency-electric transition-colors font-medium"
+                  className="text-white hover:text-[#006FFF] transition-colors font-medium"
                 >
                   contact@neotra.id
                 </a>
@@ -67,7 +67,7 @@ export default function Footer() {
                   href="https://wa.me/6281380870105"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                  className="text-[#94A3B8] hover:text-white transition-colors"
                 >
                   +62 813 8087 0105
                 </a>
@@ -90,7 +90,7 @@ export default function Footer() {
                   href={soc.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#94A3B8] hover:text-[#F8FAFC] transition-colors inline-flex items-center gap-1 group"
+                  className="text-[#94A3B8] hover:text-white transition-colors inline-flex items-center gap-1 group"
                 >
                   <span>{soc.label}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />

@@ -5,18 +5,14 @@
 @tailwind utilities;
 
 :root {
-  /* Color Tokens according to design.md specification */
-  --color-electric-blue: #006fff;
-  --color-navy-blue: #0f2d56;
-  --color-dark-navy: #0a0f1a;
-  --color-surface-dark: #111927;
-  --color-surface-hover: #1a2538;
-  --color-border-dark: #1e2c44;
-  --color-light-gray: #f5f7fa;
-  --color-pure-white: #ffffff;
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  /* New Color Tokens (Light Theme Canvas) according to updated design.md */
+  --color-bg: #ffffff;
+  --color-surface: #f5f7fa;
+  --color-text-primary: #0a0f1a;
+  --color-text-secondary: #64748b;
+  --color-border: #e2e8f0;
+  --color-blue: #006fff;
+  --color-dark-blue: #0f2d56;
 
   /* Layout */
   --container-max-width: 1080px;
@@ -24,16 +20,16 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-dark-navy);
-  color: var(--color-text-primary);
+  background-color: #ffffff;
+  color: #0a0f1a;
   font-family: 'Inter', sans-serif;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   overflow-x: hidden;
-  background-color: #0a0f1a;
-  color: #f8fafc;
+  background-color: #ffffff;
+  color: #0a0f1a;
   font-family: 'Inter', sans-serif;
 }
 
@@ -48,58 +44,59 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0f1a;
+  background: #f5f7fa;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e2c44;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0f2d56;
+  background: #94a3b8;
 }
 
-/* Electric Blue Glow Button Utility */
-.btn-primary-electric {
+/* Primary Blue Glow Button Utility */
+.btn-primary-blue {
   background-color: #006fff;
   color: #ffffff;
-  box-shadow: 0 0 20px -5px rgba(0, 111, 255, 0.45);
+  box-shadow: 0 4px 16px -2px rgba(0, 111, 255, 0.35);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-primary-electric:hover {
+.btn-primary-blue:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 32px 0px rgba(0, 111, 255, 0.65);
-  background-color: #1a7fff;
+  box-shadow: 0 8px 24px 0px rgba(0, 111, 255, 0.5);
+  background-color: #0060df;
 }
 
-/* Agency Card Hover & Elevate */
-.card-agency {
-  background-color: #111927;
-  border: 1px solid #1e2c44;
+/* Agency Card Hover & Elevate (Light Theme) */
+.card-agency-light {
+  background-color: #f5f7fa;
+  border: 1px solid #e2e8f0;
   transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card-agency:hover {
-  background-color: #1a2538;
-  border-color: rgba(0, 111, 255, 0.45);
+.card-agency-light:hover {
+  background-color: #ffffff;
+  border-color: rgba(0, 111, 255, 0.4);
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 30px -5px rgba(10, 15, 26, 0.08);
 }
 
-/* Grid & Line utilities */
-.bg-grid-pattern {
+/* Precision Line Grid */
+.bg-grid-pattern-light {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(30, 44, 68, 0.3) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(30, 44, 68, 0.3) 1px, transparent 1px);
+    linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
 }
 
 /* Typography styles */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   letter-spacing: -0.025em;
+  color: #0a0f1a;
 }
 
 .font-mono {

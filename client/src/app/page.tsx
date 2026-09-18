@@ -26,14 +26,14 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0A0F1A] text-[#F8FAFC] flex flex-col justify-between selection:bg-agency-electric selection:text-white">
+    <main className="min-h-screen bg-white text-[#0A0F1A] flex flex-col justify-between selection:bg-[#006FFF] selection:text-white">
       {/* Precision Frame Container with Vertical Border Lines */}
-      <div className="w-full bg-[#0A0F1A]">
+      <div className="w-full bg-white">
         {/* Floating Navbar */}
         <Navbar onOpenConsultation={handleOpenConsultation} />
 
         {/* Main Content with Precision Frame Borders */}
-        <div className="max-w-[1080px] mx-auto border-x border-[#1E2C44] bg-[#0A0F1A]">
+        <div className="max-w-[1080px] mx-auto border-x border-[#E2E8F0] bg-white">
           {/* Hero Section */}
           <Hero onOpenConsultation={handleOpenConsultation} />
 

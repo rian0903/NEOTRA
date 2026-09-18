@@ -2,21 +2,20 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'NEOTRA | Jakarta Digital Web Agency® Trusted by 100+ Brands®',
-  description: 'Trusted by 100+ Brands. We design, build, and optimize websites and digital products that drive measurable growth for our clients.',
+  title: 'NEOTRA | Integrated Digital Engineering Studio',
+  description: 'Digital Engineering Studio providing web application development, e-commerce, SEO & AI search optimization, IoT & smart automation, and technical architecture.',
   keywords: [
-    'Jakarta Web Agency',
     'Digital Engineering Studio',
+    'Jakarta Web Agency',
     'Next.js Web Development',
     'Go REST API',
-    'UI/UX Design',
+    'UI/UX Design System',
     'SEO & AI Search Optimization',
-    'IoT Automation',
     'NEOTRA',
   ],
   authors: [{ name: 'NEOTRA Strategic Group' }],
   openGraph: {
-    title: 'NEOTRA | Jakarta Digital Web Agency® Trusted by 100+ Brands®',
+    title: 'NEOTRA | Integrated Digital Engineering Studio',
     description: 'We design, build, and ship high-performance websites and digital systems combining strategic design, built-in SEO, and full handover.',
     url: 'https://neotra.id',
     siteName: 'NEOTRA',
@@ -35,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="dark scroll-smooth">
-      <body className="bg-agency-dark text-agency-textPrimary antialiased selection:bg-agency-electric selection:text-white min-h-screen">
+    <html lang="id" className="scroll-smooth">
+      <body className="bg-[#FFFFFF] text-[#0A0F1A] antialiased selection:bg-[#006FFF] selection:text-white min-h-screen">
         {children}
       </body>
     </html>

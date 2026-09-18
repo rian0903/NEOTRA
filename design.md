@@ -7,7 +7,8 @@
 
 ## 1. Filosofi Desain & Karakteristik Visual
 
-Website ini merepresentasikan studio web development premium kelas atas (*high-end digital agency*) yang mengedepankan presisi visual, tipografi editorial Swiss, tata letak grid geometris, dan konversi bisnis.
+NEOTRA is an **Integrated Digital Engineering Studio**.
+The visual language must communicate precision, engineering capability, modern aesthetics, and practical utility.
 
 ### Karakteristik Inti:
 1. **Dark Aesthetic & High-Contrast Hierarchy:** Latar belakang bernuansa *Dark Navy* pekat berpadu dengan aksen *Electric Blue* yang terukur, menciptakan impresi teknologi modern dan kredibilitas agensi kelas dunia.
@@ -23,34 +24,25 @@ Palet warna telah disesuaikan secara presisi dengan sistem nilai HEX dan RGB, di
 
 ### Tabel Token Warna
 
-| Nama Token | HEX | RGB | Persentase Penggunaan | Peran & Penggunaan Utama |
+| Nama Token | HEX | RGB | Komposisi | Peran & Penggunaan |
 | :--- | :--- | :--- | :--- | :--- |
-| **Dark Navy** | `#0A0F1A` | `10, 15, 26` | **60% – 70%** | Background utama halaman (`body`), canvas dasar |
-| **Surface Dark** | `#111927` | `17, 25, 39` | **8% – 18%** | Latar kartu (card), kontainer section terangkat, badge dasar |
-| **Surface Hover** | `#1A2538` | `26, 37, 56` | *Interaktif* | Efek hover pada kartu, dropdown, dan input form |
-| **Navy Blue** | `#0F2D56` | `15, 45, 86` | **3% – 6%** | Aksen sekunder, latar tombol sekunder, gradient blend |
-| **Border Dark** | `#1E2C44` | `30, 44, 68` | **4% – 8%** | Garis pemisah (*divider*), border kartu, outline grid |
-| **Text Primary** | `#F8FAFC` | `248, 250, 252` | **8% – 15%** | Heading utama (H1, H2), teks sorotan, label aktif |
-| **Text Secondary** | `#94A3B8` | `148, 163, 184` | **5% – 10%** | Paragraf deskripsi, body copy, subtitle penjelasan |
-| **Text Muted** | `#64748B` | `100, 116, 139` | **2% – 5%** | Timestamp, nomor indeks mono (`01`), metadata, copyright |
-| **Pure White** | `#FFFFFF` | `255, 255, 255` | **1% – 2%** | Logo glyph, ikon dengan kontras tertinggi, tooltip |
-| **Light Gray** | `#F5F7FA` | `245, 247, 250` | *Aksen Terang* | Inverted card section (jika ada card highlight terang) |
-| **Electric Blue** | `#006FFF` | `0, 111, 255` | **2% – 5%** | **Primary CTA**, glow hover, active pill status, link fokus |
-
+| **Background** | `#FFFFFF` | `255, 255, 255` | **60–70%** | Background utama seluruh halaman |
+| **Surface** | `#F5F7FA` | `245, 247, 250` | **10–15%** | Section alternatif, card, input, elevated area |
+| **Primary Text** | `#0A0F1A` | `10, 15, 26` | **8–12%** | Heading, body text utama, navigasi |
+| **Secondary Text** | `#64748B` | `100, 116, 139` | **3–6%** | Paragraph, subtitle, metadata |
+| **Border** | `#E2E8F0` | `226, 232, 240` | **2–5%** | Divider, border, grid |
+| **Blue** | `#006FFF` | `0, 111, 255` | **5–10%** | CTA, link, highlight, active state, visual accent |
+| **Dark Blue** | `#0F2D56` | `15, 45, 86` | **1–3%** | Deep accent, footer, special section |
 ### Aturan Distribusi Warna (*Color Balance Formula*)
-```
-┌────────────────────────────────────────────────────────┐
-│  Dark Base & Surfaces (Dark Navy + Surface) : 70 - 75% │
-├────────────────────────────────────────────────────────┤
-│  White / High-Contrast Text (Text Primary) : 18 - 22%  │
-├────────────────────────────────────────────────────────┤
-│  Electric Blue (Focal Points & Buttons)    : 2 - 5%   │
-└────────────────────────────────────────────────────────┘
-```
-> **Aturan Khusus Electric Blue (2–5% Rule):**
-> Warna `#006FFF` hanya boleh digunakan pada elemen interaktif kunci: tombol Call-To-Action utama, indicator dot "Available for Q4", hover underline tautan, dan badge aktif. Hindari penggunaan Electric Blue pada area permukaan luas agar eksklusivitas warna aksen tetap terjaga.
 
----
+WHITE        ████████████████████████████████████████  60–70%
+LIGHT GRAY   █████████                               10–15%
+TEXT         ███████                                  8–12%
+BLUE         █████                                    5–10%
+SECONDARY    ███                                      3–6%
+BORDER       ██                                       2–5%
+DARK BLUE    █                                        1–3%
+
 
 ## 3. Sistem Tipografi
 
