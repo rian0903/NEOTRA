@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { NAV_LINKS, HERO_DATA } from '@/data/content';
+import { NAV_LINKS } from '@/data/content';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
@@ -57,7 +57,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#21B30B]"></span>
               </span>
               <span className="text-xs font-mono text-[#64748B]">
-                {HERO_DATA.availability}
+                STUDIO ONLINE
               </span>
             </div>
 
@@ -66,7 +66,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               onClick={onOpenConsultation}
               className="btn-primary-blue px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
             >
-              Book Call
+              Mulai Konsultasi
               <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -77,7 +77,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               onClick={onOpenConsultation}
               className="btn-primary-blue px-3.5 py-1.5 rounded-full text-xs font-semibold"
             >
-              Book Call
+              Konsultasi
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -108,7 +108,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#F5F7FA] border border-[#E2E8F0]">
                 <span className="h-2 w-2 rounded-full bg-[#21B30B]"></span>
                 <span className="text-xs font-mono text-[#64748B]">
-                  {HERO_DATA.availability}
+                  STUDIO ONLINE
                 </span>
               </div>
               <button
@@ -118,7 +118,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 }}
                 className="btn-primary-blue w-full max-w-xs py-3 rounded-full font-semibold flex items-center justify-center gap-2"
               >
-                Book Free Discovery Call <ArrowUpRight className="w-4 h-4" />
+                Mulai Konsultasi <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>
           </div>

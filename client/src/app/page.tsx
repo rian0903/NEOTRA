@@ -3,11 +3,9 @@
 import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Hero from '@/components/sections/Hero';
-import TechMarquee from '@/components/sections/TechMarquee';
 import SelectedWork from '@/components/sections/SelectedWork';
-import StrategicHighlight from '@/components/sections/StrategicHighlight';
+import Statement from '@/components/sections/Statement';
 import Services from '@/components/sections/Services';
-import Pricing from '@/components/sections/Pricing';
 import Process from '@/components/sections/Process';
 import Proof from '@/components/sections/Proof';
 import FAQ from '@/components/sections/FAQ';
@@ -34,41 +32,35 @@ export default function Home() {
 
         {/* Main Content with Precision Frame Borders */}
         <div className="max-w-[1080px] mx-auto border-x border-[#E2E8F0] bg-white">
-          {/* Hero Section */}
+          {/* 1. Hero Section (PRD-v2 Sec 7) */}
           <Hero onOpenConsultation={handleOpenConsultation} />
 
-          {/* Infinite Marquee Logo Cloud */}
-          <TechMarquee />
-
-          {/* Selected Portfolio Work */}
+          {/* 2. Selected Portfolio Work (PRD-v2 Sec 8) */}
           <SelectedWork />
 
-          {/* Strategic Highlight Banner */}
-          <StrategicHighlight />
+          {/* 3. Positioning Statement (PRD-v2 Sec 4) */}
+          <Statement />
 
-          {/* Services & Bento Grid */}
+          {/* 4. 5 Core Services (PRD-v2 Sec 9) */}
           <Services onOpenConsultation={handleOpenConsultation} />
 
-          {/* Pricing Packages */}
-          <Pricing onOpenConsultation={handleOpenConsultation} />
-
-          {/* Process Workflow */}
+          {/* 5. Process Workflow (PRD-v2 Sec 10) */}
           <Process />
 
-          {/* Proof & Client Reviews */}
+          {/* 6. Proof & Verified Results (PRD-v2 Sec 11) */}
           <Proof />
 
-          {/* FAQ Accordion */}
+          {/* 7. FAQ Accordion (PRD-v2 Sec 12) */}
           <FAQ />
 
-          {/* Contact / Pre-Footer CTA */}
+          {/* 8. Contact / Pre-Footer CTA (PRD-v2 Sec 13) */}
           <Contact
             isOpenModal={isConsultationModalOpen}
             onCloseModal={handleCloseConsultation}
           />
         </div>
 
-        {/* Footer */}
+        {/* 9. Footer */}
         <Footer />
       </div>
     </main>
