@@ -40,22 +40,36 @@ body {
   outline-offset: 2px;
 }
 
-/* Custom Scrollbar */
+/* Custom Modern Scrollbar */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #006fff #f5f7fa;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f5f7fa;
+  border-left: 1px solid #e2e8f0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: #006fff;
+  border-radius: 9999px;
+  border: 2px solid #f5f7fa;
+  transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #0052c2;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #0f2d56;
 }
 
 /* Primary Blue Glow Button Utility */
