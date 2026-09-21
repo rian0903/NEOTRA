@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { WORK_ITEMS } from '@/data/content';
+import { WORK_ITEMS as fallbackWorkItems } from '@/data/content';
+import { useSiteData } from '@/hooks/useSiteData';
 import { WorkItem } from '@/types';
 import WorkModal from '@/components/common/WorkModal';
 import ScrollReveal from '@/components/common/ScrollReveal';
@@ -9,6 +10,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 export default function SelectedWork() {
   const [selectedWork, setSelectedWork] = useState<WorkItem | null>(null);
+  const { workItems } = useSiteData();
+  const itemsToRender = workItems && workItems.length > 0 ? workItems : fallbackWorkItems;
 
   return (
     <section id="work" className="py-20 md:py-28 border-b border-[#E2E8F0] bg-white">
@@ -32,7 +35,7 @@ export default function SelectedWork() {
 
         {/* 2-Column Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {WORK_ITEMS.map((work, idx) => (
+          {itemsToRender.map((work, idx) => (
             <ScrollReveal key={work.slug} direction="up" delay={0.15 * (idx + 1)}>
               <div
                 role="button"

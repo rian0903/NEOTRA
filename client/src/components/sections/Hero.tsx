@@ -1,6 +1,7 @@
 'use client';
 
-import { HERO_DATA } from '@/data/content';
+import { HERO_DATA as fallbackHero } from '@/data/content';
+import { useSiteData } from '@/hooks/useSiteData';
 import ScrollReveal from '@/components/common/ScrollReveal';
 
 interface HeroProps {
@@ -8,6 +9,9 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenConsultation }: HeroProps) {
+  const { heroData } = useSiteData();
+  const currentHero = heroData || fallbackHero;
+
   return (
     <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 border-b border-[#E2E8F0] bg-white overflow-hidden">
       {/* Background Ambient Glow */}
@@ -17,21 +21,21 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
         {/* Overline Metadata */}
         <ScrollReveal direction="up" delay={0.05}>
           <span className="text-xs md:text-sm font-mono text-[#006FFF] uppercase tracking-widest block mb-4">
-            {HERO_DATA.overline}
+            {currentHero.overline}
           </span>
         </ScrollReveal>
 
         {/* H1 Headline */}
         <ScrollReveal direction="up" delay={0.1}>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#0A0F1A] tracking-tight leading-[1.08] max-w-4xl mx-auto mb-6">
-            {HERO_DATA.headline}
+            {currentHero.headline}
           </h1>
         </ScrollReveal>
 
         {/* Subtitle */}
         <ScrollReveal direction="up" delay={0.2}>
           <p className="text-base sm:text-lg md:text-xl text-[#475569] max-w-2xl mx-auto leading-relaxed mb-10 font-sans">
-            {HERO_DATA.supporting}
+            {currentHero.supporting}
           </p>
         </ScrollReveal>
 
@@ -43,7 +47,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
               onClick={onOpenConsultation}
               className="btn-primary-blue w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-full text-base font-semibold flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
             >
-              <span>{HERO_DATA.primaryCta}</span>
+              <span>{currentHero.primaryCta}</span>
             </button>
 
             {/* Secondary CTA Button */}
@@ -51,7 +55,7 @@ export default function Hero({ onOpenConsultation }: HeroProps) {
               href="#work"
               className="w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-full bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-base font-semibold hover:bg-white transition-colors flex items-center justify-center shadow-xs focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
             >
-              <span>{HERO_DATA.secondaryCta}</span>
+              <span>{currentHero.secondaryCta}</span>
             </a>
           </div>
         </ScrollReveal>

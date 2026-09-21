@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { NAV_LINKS } from '@/data/content';
+import { NAV_LINKS as fallbackNavLinks } from '@/data/content';
+import { useSiteData } from '@/hooks/useSiteData';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -11,6 +12,8 @@ interface NavbarProps {
 export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { navLinks } = useSiteData();
+  const linksToRender = navLinks && navLinks.length > 0 ? navLinks : fallbackNavLinks;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +60,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E8F0] rounded-full px-4 sm:px-5 md:px-6 py-2 md:py-2.5 flex items-center justify-between gap-3 md:gap-6 shadow-sm flex-1 min-w-0">
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-4 lg:gap-7" aria-label="Main Navigation">
-            {NAV_LINKS.map((link) => (
+            {linksToRender.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -112,7 +115,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               alt="NEOTRA"
               className="h-10 w-auto object-contain mb-4"
             />
-            {NAV_LINKS.map((link) => (
+            {linksToRender.map((link) => (
               <a
                 key={link.label}
                 href={link.href}

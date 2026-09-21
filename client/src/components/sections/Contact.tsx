@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { CONTACT_DATA } from '@/data/content';
+import { CONTACT_DATA as fallbackContact } from '@/data/content';
+import { useSiteData } from '@/hooks/useSiteData';
 import ScrollReveal from '@/components/common/ScrollReveal';
 import { MessageSquare, Send, CheckCircle2, X } from 'lucide-react';
 
@@ -14,6 +15,8 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
   const [internalModalOpen, setInternalModalOpen] = useState(false);
   const isModalOpen = isOpenModal !== undefined ? isOpenModal : internalModalOpen;
   const closeModal = onCloseModal || (() => setInternalModalOpen(false));
+  const { contactData, addInquiry } = useSiteData();
+  const currentContact = contactData || fallbackContact;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -41,10 +44,19 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Save inquiry to local state / storage for Admin view
+    addInquiry({
+      full_name: formData.name,
+      contact: formData.phone,
+      email: formData.email,
+      service: formData.serviceCategory,
+      message: formData.message,
+    });
+
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
       // Align payload with Go backend InquiryRequest model
-      const res = await fetch(`${apiUrl}/api/v1/inquiry`, {
+      await fetch(`${apiUrl}/api/v1/inquiry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,10 +70,6 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
         }),
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to submit inquiry to backend');
-      }
-
       setSubmitted(true);
     } catch (err: any) {
       // Optimistic fallback for frontend UX when backend is offline
@@ -71,8 +79,8 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
     }
   };
 
-  const whatsappUrl = `https://wa.me/${CONTACT_DATA.whatsAppNumber}?text=${encodeURIComponent(
-    CONTACT_DATA.whatsAppMessage
+  const whatsappUrl = `https://wa.me/${currentContact.whatsAppNumber}?text=${encodeURIComponent(
+    currentContact.whatsAppMessage
   )}`;
 
   return (
@@ -89,11 +97,11 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
             </span>
 
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-extrabold text-[#0A0F1A] tracking-tight max-w-3xl mx-auto mb-6">
-              {CONTACT_DATA.headline}
+              {currentContact.headline}
             </h2>
 
             <p className="text-base md:text-xl text-[#475569] max-w-2xl mx-auto mb-10 font-sans">
-              {CONTACT_DATA.supporting}
+              {currentContact.supporting}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -102,7 +110,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                 onClick={() => setInternalModalOpen(true)}
                 className="btn-primary-blue w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-full text-base font-semibold flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
               >
-                <span>{CONTACT_DATA.primaryCta}</span>
+                <span>{currentContact.primaryCta}</span>
               </button>
 
               {/* WhatsApp Link */}
@@ -113,7 +121,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                 className="w-full sm:w-auto min-h-[48px] px-8 py-3.5 rounded-full bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-base font-semibold hover:bg-white transition-colors flex items-center justify-center gap-2 shadow-xs focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
               >
                 <MessageSquare className="w-5 h-5 text-emerald-600" />
-                <span>{CONTACT_DATA.whatsApp}</span>
+                <span>{currentContact.whatsApp}</span>
               </a>
             </div>
           </ScrollReveal>
