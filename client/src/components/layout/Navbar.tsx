@@ -34,59 +34,59 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   return (
     <>
       <header
-        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-[1080px] flex items-center justify-between pointer-events-none transition-all duration-300 ${
+        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-[1080px] flex items-center justify-between gap-3 sm:gap-4 md:gap-6 pointer-events-none transition-all duration-300 ${
           scrolled ? 'drop-shadow-md' : ''
         }`}
       >
-        {/* Left Floating Logo Container */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E8F0] rounded-full px-4 py-2 md:px-5 md:py-2.5 flex items-center shadow-sm">
+        {/* Standalone Logo (No card/container, prominent & responsive across devices) */}
+        <div className="pointer-events-auto flex items-center shrink-0">
           <a
             href="/"
             aria-label="NEOTRA Home"
-            className="flex items-center group rounded-full focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
+            className="flex items-center group rounded-md focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none py-1 transition-opacity hover:opacity-90"
           >
             <img
               src="/brand/logo2.png"
               alt="NEOTRA"
-              className="h-6 md:h-7.5 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-transform group-hover:scale-105"
             />
           </a>
         </div>
 
-        {/* Right Floating Nav Pill Container */}
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E8F0] rounded-full px-4 py-2 md:px-6 md:py-2.5 flex items-center gap-4 lg:gap-6 shadow-sm">
+        {/* Floating Navbar Pill Container - Extends neatly up to the side of logo */}
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-[#E2E8F0] rounded-full px-4 sm:px-5 md:px-6 py-2 md:py-2.5 flex items-center justify-between gap-3 md:gap-6 shadow-sm flex-1 min-w-0">
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-5 lg:gap-7" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-7" aria-label="Main Navigation">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-[#475569] hover:text-[#0A0F1A] transition-colors rounded-sm focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
+                className="text-xs lg:text-sm font-medium text-[#475569] hover:text-[#006FFF] transition-colors rounded-sm focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none whitespace-nowrap"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Mulai Konsultasi Button */}
+          {/* Desktop Mulai Konsultasi Button */}
           <button
             onClick={onOpenConsultation}
-            className="btn-primary-blue px-4 py-2 rounded-full text-xs font-semibold hidden md:flex items-center justify-center cursor-pointer shrink-0 focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
+            className="btn-primary-blue px-4 lg:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-semibold hidden md:flex items-center justify-center cursor-pointer shrink-0 focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none ml-auto"
           >
             Mulai Konsultasi
           </button>
 
           {/* Mobile Menu Controls */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className="flex items-center gap-2 md:hidden w-full justify-between sm:justify-end">
             <button
               onClick={onOpenConsultation}
-              className="btn-primary-blue min-h-[44px] px-3.5 py-2 rounded-full text-xs font-semibold flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
+              className="btn-primary-blue min-h-[40px] px-3.5 py-2 rounded-full text-xs font-semibold flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none shrink-0"
             >
               Konsultasi
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="min-w-[44px] min-h-[44px] p-2.5 text-[#475569] hover:text-[#0A0F1A] rounded-full bg-[#F5F7FA] border border-[#E2E8F0] flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
+              className="min-w-[40px] min-h-[40px] p-2 text-[#475569] hover:text-[#0A0F1A] rounded-full bg-[#F5F7FA] border border-[#E2E8F0] flex items-center justify-center cursor-pointer focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -110,7 +110,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             <img
               src="/brand/logo2.png"
               alt="NEOTRA"
-              className="h-9 w-auto object-contain mb-4"
+              className="h-10 w-auto object-contain mb-4"
             />
             {NAV_LINKS.map((link) => (
               <a
