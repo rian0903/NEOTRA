@@ -19,7 +19,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
     name: '',
     email: '',
     phone: '',
-    serviceCategory: 'Web Engineering',
+    serviceCategory: 'Real-Time Direct Messaging (Chat 1-on-1 & Grup)',
     message: '',
   });
 
@@ -172,7 +172,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                   Mulai Konsultasi Teknis
                 </h3>
                 <p className="text-xs sm:text-sm text-[#475569] mb-6">
-                  Sampaikan kebutuhan web, otomasi IoT, jaringan, atau desain sistem proyek Anda.
+                  Sampaikan kebutuhan pengembangan fitur sosial media, obrolan real-time (chatting), atau platform komunikasi interaktif Anda.
                 </p>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -224,7 +224,7 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
 
                   <div>
                     <label htmlFor="contact-service" className="block text-xs font-mono text-[#475569] mb-1">
-                      Kategori Layanan
+                      Kategori Fitur / Layanan
                     </label>
                     <select
                       id="contact-service"
@@ -232,24 +232,26 @@ export default function Contact({ isOpenModal, onCloseModal }: ContactProps) {
                       onChange={(e) => setFormData({ ...formData, serviceCategory: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-sm focus:outline-none focus:border-[#006FFF] focus-visible:ring-2 focus-visible:ring-[#006FFF]"
                     >
-                      <option value="Web Engineering">Web Engineering</option>
-                      <option value="IoT & Smart Automation">IoT & Smart Automation</option>
-                      <option value="Network & Infrastructure">Network & Infrastructure</option>
-                      <option value="Digital Design / UI/UX">Digital Design / UI/UX</option>
-                      <option value="Technical Mentorship & Project Assistance">Technical Mentorship & Project Assistance</option>
+                      <option value="Real-Time Direct Messaging (Chat 1-on-1 & Grup)">Real-Time Direct Messaging (Chat 1-on-1 & Grup)</option>
+                      <option value="Social Media Feed, Timeline & Story System">Social Media Feed, Timeline & Story System</option>
+                      <option value="Voice & Video Call Integration (WebRTC)">Voice & Video Call Integration (WebRTC)</option>
+                      <option value="Push Notifications & Real-Time Activity Alerts">Push Notifications & Real-Time Activity Alerts</option>
+                      <option value="User Profiles, Follow/Friendship & Discovery">User Profiles, Follow/Friendship & Discovery</option>
+                      <option value="End-to-End Encryption & Security Chat">End-to-End Encryption & Security Chat</option>
+                      <option value="Custom Social Platform Development">Custom Social Platform Development</option>
                     </select>
                   </div>
 
                   <div>
                     <label htmlFor="contact-message" className="block text-xs font-mono text-[#475569] mb-1">
-                      Deskripsi Proyek / Kebutuhan
+                      Deskripsi Proyek / Kebutuhan Fitur
                     </label>
                     <textarea
                       id="contact-message"
                       rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Jelaskan secara singkat apa yang ingin Anda bangun, perbaiki, atau hubungkan..."
+                      placeholder="Jelaskan secara singkat fitur sosial media atau aplikasi chatting yang ingin Anda bangun (contoh: Chat 1-on-1, Group Chat, Feed Foto/Video, Push Notification)..."
                       className="w-full px-4 py-3 rounded-xl bg-[#F5F7FA] border border-[#E2E8F0] text-[#0A0F1A] text-sm focus:outline-none focus:border-[#006FFF] focus-visible:ring-2 focus-visible:ring-[#006FFF] resize-none"
                     />
                   </div>

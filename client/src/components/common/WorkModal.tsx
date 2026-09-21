@@ -57,6 +57,13 @@ export default function WorkModal({ work, item, onClose }: WorkModalProps) {
           {activeItem.title}
         </h2>
 
+        {/* Project Image Preview Banner */}
+        {activeItem.image && (
+          <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-[#E2E8F0] mb-6 shadow-sm">
+            <img src={activeItem.image} alt={activeItem.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+
         <p className="text-[#475569] leading-relaxed mb-6 text-sm md:text-base font-sans">
           {activeItem.fullDescription}
         </p>

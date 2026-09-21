@@ -48,16 +48,22 @@ export default function SelectedWork() {
                 className="card-agency-light rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-full focus-visible:ring-2 focus-visible:ring-[#006FFF] focus-visible:outline-none"
               >
                 {/* Media Container (16:10 aspect ratio) */}
-                <div className="relative aspect-[16/10] bg-[#F5F7FA] overflow-hidden border-b border-[#E2E8F0] flex items-center justify-center p-8">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0F2D56]/10 via-[#F5F7FA] to-[#E2E8F0] group-hover:scale-105 transition-transform duration-500 ease-out" />
+                <div className="relative aspect-[16/10] bg-[#F5F7FA] overflow-hidden border-b border-[#E2E8F0] flex items-center justify-center">
+                  {work.image ? (
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0F2D56]/10 via-[#F5F7FA] to-[#E2E8F0] group-hover:scale-105 transition-transform duration-500 ease-out" />
+                  )}
 
-                  <div className="relative z-10 text-center p-6 bg-white/95 backdrop-blur-sm border border-[#E2E8F0] rounded-xl group-hover:border-[#006FFF]/50 transition-colors shadow-xs">
-                    <span className="text-xs font-mono text-[#006FFF] block mb-1">
+                  {/* Category Badge Overlay */}
+                  <div className="absolute bottom-4 left-4 z-10 px-3 py-1.5 bg-white/95 backdrop-blur-md border border-[#E2E8F0] rounded-lg shadow-xs">
+                    <span className="text-xs font-mono font-semibold text-[#006FFF]">
                       {work.category}
                     </span>
-                    <h3 className="text-lg md:text-xl font-display font-bold text-[#0A0F1A]">
-                      {work.title}
-                    </h3>
                   </div>
 
                   <div className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/95 backdrop-blur-md border border-[#E2E8F0] flex items-center justify-center text-[#0A0F1A] group-hover:bg-[#006FFF] group-hover:text-white transition-colors shadow-xs">
