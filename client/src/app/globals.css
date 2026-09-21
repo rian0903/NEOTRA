@@ -5,16 +5,13 @@
 @tailwind utilities;
 
 :root {
-  /* New Color Tokens (Light Theme Canvas) according to updated design.md */
   --color-bg: #ffffff;
   --color-surface: #f5f7fa;
   --color-text-primary: #0a0f1a;
-  --color-text-secondary: #64748b;
+  --color-text-secondary: #475569;
   --color-border: #e2e8f0;
   --color-blue: #006fff;
   --color-dark-blue: #0f2d56;
-
-  /* Layout */
   --container-max-width: 1080px;
 }
 
@@ -36,6 +33,11 @@ body {
 ::selection {
   background: #006fff;
   color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid #006fff;
+  outline-offset: 2px;
 }
 
 /* Custom Scrollbar */
@@ -70,7 +72,7 @@ body {
   background-color: #0060df;
 }
 
-/* Agency Card Hover & Elevate (Light Theme) */
+/* Agency Card Hover & Elevate */
 .card-agency-light {
   background-color: #f5f7fa;
   border: 1px solid #e2e8f0;
@@ -82,14 +84,6 @@ body {
   border-color: rgba(0, 111, 255, 0.4);
   transform: translateY(-3px);
   box-shadow: 0 12px 30px -5px rgba(10, 15, 26, 0.08);
-}
-
-/* Precision Line Grid */
-.bg-grid-pattern-light {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(226, 232, 240, 0.6) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(226, 232, 240, 0.6) 1px, transparent 1px);
 }
 
 /* Typography styles */

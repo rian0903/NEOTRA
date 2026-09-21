@@ -38,14 +38,12 @@ func (h *Handler) CreateInquiry(c *fiber.Ctx) error {
 		})
 	}
 
-	// Trim whitespace
 	req.FullName = strings.TrimSpace(req.FullName)
 	req.Contact = strings.TrimSpace(req.Contact)
 	req.Email = strings.TrimSpace(req.Email)
 	req.Service = strings.TrimSpace(req.Service)
 	req.Message = strings.TrimSpace(req.Message)
 
-	// Validation
 	var validationErrors []string
 
 	if req.FullName == "" {
@@ -76,10 +74,8 @@ func (h *Handler) CreateInquiry(c *fiber.Ctx) error {
 		})
 	}
 
-	// Generate Ticket ID: NEO-YYYYMMDD-XXXX
 	ticketID := generateTicketID()
 
-	// In a production system, this saves to DB or notifies Telegram/Email.
 	fmt.Printf("[INQUIRY RECEIVED] Ticket: %s | Name: %s | Contact: %s | Email: %s | Service: %s\n",
 		ticketID, req.FullName, req.Contact, req.Email, req.Service)
 

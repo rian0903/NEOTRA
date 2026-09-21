@@ -42,23 +42,3 @@ export type TechStackItem = {
   name: string;
   category: string;
 };
-
-export type TestimonialProof = {
-  quote: string;
-  client: string;
-  role: string;
-  company: string;
-  rating: number;
-  avatar?: string;
-};
-
-export type PricingPackage = {
-  id: string;
-  name: string;
-  tagline: string;
-  price: string;
-  period: string;
-  recommended?: boolean;
-  features: string[];
-  cta: string;
-};

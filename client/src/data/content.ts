@@ -4,7 +4,7 @@ export const NAV_LINKS = [
   { label: 'Pekerjaan', href: '#work' },
   { label: 'Layanan', href: '#services' },
   { label: 'Proses', href: '#process' },
-  { label: 'Kemampuan', href: '#capabilities' },
+  { label: 'Standar', href: '#proof' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Konsultasi', href: '#contact' },
 ];
@@ -12,7 +12,7 @@ export const NAV_LINKS = [
 export const HERO_DATA = {
   overline: 'DIGITAL ENGINEERING STUDIO',
   headline: 'We build digital systems that make complex things feel simple.',
-  supporting: 'Web, automation, infrastructure, and digital product work — designed and engineered as one system.',
+  supporting: 'Web, automation, infrastructure, and digital product work, designed and engineered as one unified system.',
   primaryCta: 'Mulai Konsultasi',
   secondaryCta: 'Lihat Pekerjaan',
   metadata: ['WEB', 'IOT', 'NETWORK', 'DESIGN', 'MENTORSHIP'],
@@ -37,8 +37,8 @@ export const WORK_ITEMS: WorkItem[] = [
     role: 'IoT Hardware & Web Engineering',
     technologies: ['ESP32', 'MQTT', 'Go', 'Fiber', 'Next.js', 'PostgreSQL'],
     metrics: [
-      { label: 'Sensor Polling Frequency', value: '< 250ms' },
-      { label: 'System Uptime Standard', value: '99.9%' },
+      { label: 'Telemetry Polling Interval', value: '< 250ms' },
+      { label: 'Telemetry Protocol', value: 'Secure MQTT / TLS' },
     ],
   },
   {
@@ -53,8 +53,8 @@ export const WORK_ITEMS: WorkItem[] = [
     role: 'Full-Stack Web Architecture',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Go', 'Fiber', 'Docker'],
     metrics: [
-      { label: 'Lighthouse Performance Score', value: '98/100' },
-      { label: 'Page Load Speed', value: '0.4s' },
+      { label: 'Frontend Architecture', value: 'Server-Rendered SPA' },
+      { label: 'Backend API Engine', value: 'Go Fiber REST' },
     ],
   },
   {
@@ -63,14 +63,14 @@ export const WORK_ITEMS: WorkItem[] = [
     title: 'Structured Office Network & Hardening Infrastructure',
     category: 'NETWORK & INFRASTRUCTURE',
     year: 2025,
-    summary: 'Enterprise LAN/Wi-Fi deployment, VLAN segmentation, and VPN security hardening for multi-floor facility.',
+    summary: 'Enterprise LAN and Wi-Fi deployment, VLAN segmentation, and VPN security hardening for multi-floor facility.',
     fullDescription: 'Engineered physical and logical network architecture featuring MikroTik router routing, Cisco managed switches, VLAN isolation for office staff vs. guest devices, WireGuard VPN tunnels, and automated bandwidth prioritization.',
     client: 'Corporate Headquarters',
     role: 'Network Infrastructure Architecture',
     technologies: ['MikroTik', 'Cisco', 'VLAN', 'WireGuard', 'Structured Cabling'],
     metrics: [
-      { label: 'Network Throughput', value: '10 Gbps Backbone' },
-      { label: 'Security Hardening Score', value: 'Grade A' },
+      { label: 'Routing Engine', value: 'MikroTik RouterOS' },
+      { label: 'Network Topology', value: 'Isolated VLAN' },
     ],
   },
   {
@@ -85,8 +85,8 @@ export const WORK_ITEMS: WorkItem[] = [
     role: 'Lead UI/UX & System Design',
     technologies: ['Figma', 'UI Systems', 'UX Flow', 'Design Tokens', 'Prototyping'],
     metrics: [
-      { label: 'Design Tokens Created', value: '240+' },
-      { label: 'User Accessibility Rating', value: 'WCAG AAA' },
+      { label: 'Component Tokenization', value: 'Design Tokens Studio' },
+      { label: 'Accessibility Standard', value: 'WCAG 2.1 AA Compliant' },
     ],
   },
 ];
@@ -102,7 +102,7 @@ export const SERVICES: Service[] = [
       'Next.js 14 & modern JavaScript architecture',
       'High-throughput REST API & Microservices (Go/Fiber)',
       'Responsive, accessible product interfaces',
-      'Performance, Core Web Vitals & Technical SEO',
+      'Core Web Vitals & Technical SEO optimization',
       'Automated deployment, Docker & Cloud hosting',
     ],
     cta: 'Konsultasi Web',
@@ -226,9 +226,9 @@ export const PROCESS_STEPS: ProcessStep[] = [
     name: 'Build',
     summary: 'Implement with clear milestones and visible progress.',
     details: [
-      'Clean modular engineering (Frontend / Backend / Hardware)',
+      'Modular engineering across frontend, backend, and hardware',
       'Iterative milestone updates & staging previews',
-      'Version control & continuous quality assurance',
+      'Version control & continuous quality verification',
     ],
   },
   {
@@ -246,12 +246,12 @@ export const PROCESS_STEPS: ProcessStep[] = [
 export const PROOF_DATA = {
   label: 'PROOF',
   title: 'ENGINEERING STANDARDS & VERIFIED RESULTS',
-  summary: 'We measure success by real execution, clean code standards, and reliable operational uptime.',
+  summary: 'We measure success by real execution, clean code standards, and reliable operational delivery.',
   stats: [
     { label: 'Engineering Disciplines', value: '5 Core Areas' },
-    { label: 'Backend API Latency', value: '< 20ms' },
-    { label: 'Production Uptime Standard', value: '99.9%' },
-    { label: 'TypeScript Coverage', value: '100% Strict' },
+    { label: 'TypeScript Strictness', value: '100% Strict' },
+    { label: 'Concurrency Engine', value: 'Go Fiber REST' },
+    { label: 'Deployment Topology', value: 'Docker Multi-Stage' },
   ],
 };
 
@@ -285,7 +285,7 @@ export const FAQ_ITEMS: FAQItem[] = [
 
 export const CONTACT_DATA = {
   headline: 'HAVE A PROBLEM WORTH BUILDING AROUND?',
-  supporting: 'Tell us what you\'re trying to build, improve, connect, or fix.',
+  supporting: "Tell us what you're trying to build, improve, connect, or fix.",
   primaryCta: 'Mulai Konsultasi',
   whatsApp: 'Chat via WhatsApp',
   whatsAppNumber: '6281380870105',
@@ -296,7 +296,7 @@ export const CONTACT_DATA = {
 
 export const FOOTER_DATA = {
   watermark: 'Integrated Digital Engineering Studio',
-  statement: 'NEOTRA — Integrated Digital Engineering Studio.',
+  statement: 'NEOTRA: Integrated Digital Engineering Studio.',
   copyright: '© 2026 NEOTRA. All rights reserved.',
   socials: [
     { label: 'GitHub', href: 'https://github.com' },

@@ -14,7 +14,7 @@ export default function Statement() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-[#0A0F1A] max-w-4xl mx-auto leading-tight mb-6">
             "{POSITIONING_DATA.statement}"
           </h2>
-          <p className="text-[#64748B] text-base md:text-lg max-w-2xl mx-auto font-sans">
+          <p className="text-[#475569] text-base md:text-lg max-w-2xl mx-auto font-sans">
             {POSITIONING_DATA.supporting}
           </p>
         </ScrollReveal>

@@ -12,15 +12,15 @@ export default function Process() {
         <ScrollReveal direction="up" delay={0.1}>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
             <div>
-              <span className="text-xs md:text-sm font-mono text-[#64748B] tracking-wider uppercase block mb-2">
-                04 / PROCESS
+              <span className="text-xs md:text-sm font-mono text-[#006FFF] tracking-wider uppercase block mb-2">
+                03 / PROCESS
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold text-[#0A0F1A]">
                 How We Work
               </h2>
             </div>
-            <p className="text-[#64748B] text-base max-w-md mt-4 md:mt-0 font-sans">
-              A transparent 5-stage engineering workflow designed for rapid speed and zero friction.
+            <p className="text-[#475569] text-base max-w-md mt-4 md:mt-0 font-sans">
+              A transparent 5-stage engineering workflow designed for structured delivery and clear milestones.
             </p>
           </div>
         </ScrollReveal>
@@ -35,7 +35,7 @@ export default function Process() {
                     <span className="text-2xl font-mono font-bold text-[#006FFF]">
                       {step.number}
                     </span>
-                    <span className="text-xs font-mono text-[#64748B] uppercase tracking-widest">
+                    <span className="text-xs font-mono text-[#475569] uppercase tracking-widest">
                       STAGE {step.number}
                     </span>
                   </div>
@@ -44,7 +44,7 @@ export default function Process() {
                     {step.name}
                   </h3>
 
-                  <p className="text-sm text-[#64748B] leading-relaxed mb-6 font-sans">
+                  <p className="text-sm text-[#475569] leading-relaxed mb-6 font-sans">
                     {step.summary}
                   </p>
 
